@@ -1,0 +1,37 @@
+// Plannr //
+
+MVP /////
+
+Email authentication
+Each user has their own planner
+Planner contains lists
+Each list has items
+Each item has a title and some notes you can add
+Able to delete lists, items, and notes within items
+Move items between lists
+
+Stretch goals //////
+
+Create Teams- add member list to the team to verify the user is allowed to see the team and its boards. Board creator is super admin set permission levels Owner, Admin, and User. Owner can delete board, Admin can delete anything in the board, User can only delete notes
+Multiple boards per user
+Able to delete boards
+Set due dates on items
+
+
+
+Components ////
+
+Board
+List
+Item
+Notes
+About
+Login/Signup
+Navigation
+
+
+
+Stretch Components /////
+
+Profile Page
+
