@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-// import List from "./List";
-// import TextInput from "./TextInput";
-// import Item from "./Item";
-// import Note from "./Note";
+import List from "./List";
+import TextInput from "./TextInput";
 import firebase from "../firebase";
 
 const dbRef = firebase.database().ref("board");
@@ -14,23 +12,34 @@ const Board = () => {
   useEffect(() => {
     dbRef.on("value", (response) => {
       const snap = response.val();
-      setLists(Object.keys(snap));
-      console.log(lists);
+      const listsArray = Object.keys(snap);
       let snapItems = {};
 
-      lists.forEach((list) => {
+      listsArray.forEach((list) => {
         let notes = [];
         for (let note in snap[list]) {
-          notes.push(snap[list][note]);
+          let innerNotes = [];
+          for (let iNote in snap[list][note]) {
+            innerNotes.push({ [iNote]: snap[list][note][iNote] });
+          }
+          notes.push({ [note]: innerNotes });
         }
         snapItems = { ...snapItems, [list]: notes };
       });
 
+      setLists(listsArray);
       setItems(snapItems);
     });
   }, []);
 
-  return <ul className="board"></ul>;
+  return (
+    <ul className="board">
+      {lists.map((list) => {
+        return <List items={items[list]} listName={list} />;
+      })}
+      {/* <TextInput /> */}
+    </ul>
+  );
 };
 
 export default Board;
