@@ -13,7 +13,11 @@ const Board = () => {
     dbRef.on("value", (response) => {
       const snap = response.val();
       const listsArray = Object.keys(snap);
+
       let snapItems = {};
+
+      console.log(snap);
+      console.log(listsArray);
 
       listsArray.forEach((list) => {
         let notes = [];
@@ -26,7 +30,6 @@ const Board = () => {
         }
         snapItems = { ...snapItems, [list]: notes };
       });
-
       setLists(listsArray);
       setItems(snapItems);
     });
@@ -35,7 +38,7 @@ const Board = () => {
   return (
     <ul className="board">
       {lists.map((list) => {
-        return <List items={items[list]} listName={list} />;
+        return <List items={items[list]} listName={list} pathName={`/board`} />;
       })}
       {/* <TextInput /> */}
     </ul>

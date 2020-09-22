@@ -8,7 +8,13 @@ const List = (props) => {
       <ul className="itemsList">
         {props.items
           ? props.items.map((item) => {
-              return <Item notes={item} name={Object.keys(item)} />;
+              return (
+                <Item
+                  notes={item}
+                  name={Object.keys(item)}
+                  pathName={`${props.pathName}/${props.listName}`}
+                />
+              );
             })
           : null}
       </ul>
